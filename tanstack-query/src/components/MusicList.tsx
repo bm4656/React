@@ -1,24 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 
 type Music = { title: string; singer: string; id: string };
 export default function MusicList() {
-  const [musics, setMusics] = useState<Music[]>();
   const [checked, setChecked] = useState(false);
 
-  const getMuscis = async () => {
-    await fetch(`data/${checked ? 'new_' : ''}musics.json`)
-      .then((res) => res.json())
-      .then((data: Music[]) => {
-        console.log('💡데이터 받아옴');
-        setMusics(data);
-      });
-  };
-  useEffect(() => {
-    console.log('fetching...');
-    getMuscis().catch((e) => console.log('에러발생!', e));
-  }, [checked]);
+  const { data: musics } = useQuery<Music[]>({
+    queryKey: ['musics', checked],
+    queryFn: async () => {
+      const res = await fetch(`data/${checked ? 'new_' : ''}musics.json`);
+      console.log('💡데이터 받아옴');
+      return res.json();
+    },
+  });
   return (
-    <div style={{ display: 'flex', 'flex-direction': 'column' }}>
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
       <h2>MUSIC LIST</h2>
       <label>
         <input
