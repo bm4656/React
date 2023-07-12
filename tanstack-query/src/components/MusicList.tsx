@@ -5,14 +5,23 @@ type Music = { title: string; singer: string; id: string };
 export default function MusicList() {
   const [checked, setChecked] = useState(false);
 
-  const { data: musics } = useQuery<Music[]>({
+  const {
+    isLoading,
+    isError,
+    data: musics,
+    error,
+  } = useQuery<Music[]>({
     queryKey: ['musics', checked],
     queryFn: async () => {
       const res = await fetch(`data/${checked ? 'new_' : ''}musics.json`);
       console.log('💡데이터 받아옴');
-      return res.json();
+      //   return res.json();
+      throw new Error('error');
     },
   });
+  if (isLoading) return <p>Loading...</p>;
+
+  if (isError) return <span>Error</span>;
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <h2>MUSIC LIST</h2>
