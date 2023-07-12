@@ -9,15 +9,14 @@ export default function MusicList() {
     isLoading,
     isError,
     data: musics,
-    error,
   } = useQuery<Music[]>({
     queryKey: ['musics', checked],
     queryFn: async () => {
       const res = await fetch(`data/${checked ? 'new_' : ''}musics.json`);
       console.log('💡데이터 받아옴');
-      //   return res.json();
-      throw new Error('error');
+      return res.json();
     },
+    staleTime: 10000,
   });
   if (isLoading) return <p>Loading...</p>;
 
