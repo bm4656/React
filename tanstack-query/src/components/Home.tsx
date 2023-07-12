@@ -2,7 +2,7 @@ import MusicList from './MusicList';
 
 export default function Home() {
   return (
-    <main>
+    <main style={{ display: 'flex' }}>
       <MusicList />
       <MusicList />
     </main>
