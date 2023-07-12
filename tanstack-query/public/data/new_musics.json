@@ -1,14 +1,12 @@
 [
-  [
-    {
-      "title": "Super Shy",
-      "singer": "NewJeans",
-      "id": "1"
-    },
-    {
-      "title": "NewJeans",
-      "singer": "NewJeans",
-      "id": "2"
-    }
-  ]
+  {
+    "title": "Super Shy",
+    "singer": "NewJeans",
+    "id": "1"
+  },
+  {
+    "title": "NewJeans",
+    "singer": "NewJeans",
+    "id": "2"
+  }
 ]
